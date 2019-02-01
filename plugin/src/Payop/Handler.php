@@ -100,7 +100,7 @@ class Handler
         }
 
         // create order
-        $sum = $qty * $this->config->getDigits('itemPrice');
+        $sum = $qty * $this->config->get('itemPrice');
         try {
             $orderId = $this->db->createPayment($character['obj_Id'], $sum, $qty);
         } catch (\PDOException $e) {

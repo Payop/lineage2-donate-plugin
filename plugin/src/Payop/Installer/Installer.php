@@ -120,7 +120,7 @@ class Installer
                 'failUrl'     => $request->request->get('failUrl'),
                 'resultUrl'   => $request->request->get('resultUrl'),
                 'currency'    => $request->request->getAlpha('currency'),
-                'itemPrice'   => $request->request->getDigits('itemPrice'),
+                'itemPrice'   => (float)$request->request->get('itemPrice'),
                 'minItemsQty' => $request->request->getInt('minItemsQty'),
                 'itemId'      => $request->request->getInt('itemId'),
                 'itemTable'   => $request->request->get('itemTable'),
