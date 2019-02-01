@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    payop.l2.php:
+        image: nanoninja/php-fpm:7.1
+        command: /bin/bash -c "php -S 0.0.0.0:10001 -t /var/www -e >> /dev/stdout 2>&1"
+        volumes:
+            - "./plugin:/var/www"
+        ports:
+            - "10001:10001"
+        depends_on:
+            - payop.l2.mysqldb
+        networks:
+            - payop_l2_net
+    payop.l2.mysqldb:
+        image: mysql:5.7
+        environment:
+            - MYSQL_DATABASE=l2
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_USER=l2
+            - MYSQL_PASSWORD=l2
+        volumes:
+            - "./var/sql/:/docker-entrypoint-initdb.d/:ro"
+            - "./var/db_data:/var/lib/mysql:rw"
+        networks:
+            - payop_l2_net
+
+networks:
+    payop_l2_net:
+        driver: bridge

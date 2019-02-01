@@ -1,0 +1,4 @@
+# Ignore everything in this directory
+debug-2019-02-01.log
+# Except this file
+!.gitignore
