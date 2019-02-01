@@ -215,7 +215,7 @@ class Handler
         }
 
         if ((int)$payment['status'] > 0) {
-            $response->setStatusCode(Response::HTTP_BAD_REQUEST);
+            $response->setStatusCode(Response::HTTP_OK);
             $msg = "Order #{$payment['id']} already paid.";
             $this->log($msg);
             $response->setContent(\json_encode([
@@ -224,7 +224,6 @@ class Handler
             ]));
 
             return $response;
-
         }
 
         //check signature
