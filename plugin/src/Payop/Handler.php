@@ -214,6 +214,19 @@ class Handler
             return $response;
         }
 
+        if ((int)$payment['status'] > 0) {
+            $response->setStatusCode(Response::HTTP_BAD_REQUEST);
+            $msg = "Order #{$payment['id']} already paid.";
+            $this->log($msg);
+            $response->setContent(\json_encode([
+                'data'  => [],
+                'error' => ['message' => $msg],
+            ]));
+
+            return $response;
+
+        }
+
         //check signature
         $order = [
             'id'       => $payment['id'],
