@@ -28,7 +28,7 @@ if (\file_exists(__DIR__.'/installer.php')) {
     \header('location: installer.php');
 } else {
     $request = Request::createFromGlobals();
-    if (0 === \strpos($request->headers->get('Content-Type'), 'application/json')) {
+    if (0 === \strpos($request->headers->get('CONTENT_TYPE'), 'application/json')) {
         $data = \json_decode($request->getContent(), true);
         $request->request->replace(\is_array($data) ? $data : []);
     }
