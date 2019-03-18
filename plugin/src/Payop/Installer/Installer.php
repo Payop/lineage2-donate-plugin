@@ -7,7 +7,7 @@ use Payop\Db;
 use Payop\Request;
 use Payop\Template;
 use PDO;
-
+date_default_timezone_set('UTC');
 /**
  * Class Installer
  * @package Payop\Installer
@@ -53,7 +53,7 @@ class Installer
      *
      * @return string
      */
-    public function runStep($step, Request $request) : string
+    public function runStep($step, Request $request)
     {
         if (!$this->hasStep($step)) {
             throw new \InvalidArgumentException('Invalid step definition.');
@@ -81,7 +81,7 @@ class Installer
     {
         $php = [
             'version'    => \substr(PHP_VERSION, 0, 3),
-            'testPassed' => \version_compare(PHP_VERSION, '7.1') !== -1,
+            'testPassed' => \version_compare(PHP_VERSION, '5.6') !== -1,
         ];
         $mysql = [
             'drivers'    => PDO::getAvailableDrivers(),
@@ -128,7 +128,7 @@ class Installer
                 'dbName'      => $request->request->get('dbName'),
                 'dbUser'      => $request->request->get('dbUser'),
                 'dbPass'      => $request->request->get('dbPass'),
-                'dbPort'      => $dbPort ?: '',
+                'dbPort'      => isset($dbPort) ? $dbPort : '',
             ];
 
             $config->save($params);
@@ -184,7 +184,7 @@ EOT;
                 $errors[] = 'Не удалось найти таблицу персонажей с именем: characters.' . $e->getMessage();
             }
         } catch (\PDOException $e) {
-            $errors[] = 'Не удалось подключиться к базе данных. Проверьте настройки.';
+            $errors[] = 'Не удалось подключиться к базе данных. Проверьте настройки.' . $e->getMessage();
         }
 
         return $this->view->render('mysql-connection', [

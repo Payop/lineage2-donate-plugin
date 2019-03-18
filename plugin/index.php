@@ -8,6 +8,7 @@ use Payop\Response;
 \error_reporting(E_ALL);
 \ini_set('display_errors', 1);
 \ini_set('display_startup_errors', 1);
+date_default_timezone_set('UTC');
 
 \spl_autoload_register(function($className) {
     foreach (['src', 'src/Http', 'src/Http/Requests'] as $dir) {
@@ -59,7 +60,7 @@ if (\file_exists(__DIR__.'/installer.php')) {
             'post' => $request->request->all(),
             'method' => $request->getMethod(),
             'uri' => $request->getRequestUri(),
-            'route' => $routes[$action] ?? '',
+            'route' => $routes[$action] ?: '',
         ]);
     }
 

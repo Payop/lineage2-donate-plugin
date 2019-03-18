@@ -405,7 +405,7 @@ class Request
      *
      * @return bool
      */
-    public function isSecure() : bool
+    public function isSecure()
     {
         $https = $this->server->get('HTTPS');
 
@@ -430,7 +430,7 @@ class Request
      *
      * @return string
      */
-    public function getHost() : string
+    public function getHost()
     {
         if (!$host = $this->headers->get('HOST')) {
             if (!$host = $this->server->get('SERVER_NAME')) {
