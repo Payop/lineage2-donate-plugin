@@ -60,7 +60,7 @@ if (\file_exists(__DIR__.'/installer.php')) {
             'post' => $request->request->all(),
             'method' => $request->getMethod(),
             'uri' => $request->getRequestUri(),
-            'route' => $routes[$action] ?: '',
+            'route' => isset($routes[$action]) ? $routes[$action] : '',
         ]);
     }
 
