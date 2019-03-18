@@ -184,7 +184,7 @@ EOT;
                 $errors[] = 'Не удалось найти таблицу персонажей с именем: characters.' . $e->getMessage();
             }
         } catch (\PDOException $e) {
-            $errors[] = 'Не удалось подключиться к базе данных. Проверьте настройки.' . $e->getMessage();
+            $errors[] = 'Не удалось подключиться к базе данных. Проверьте настройки.';
         }
 
         return $this->view->render('mysql-connection', [
