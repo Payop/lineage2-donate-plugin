@@ -32,7 +32,7 @@ class Logger
      *
      * @return void
      */
-    public function log(string $message, array $context = [])
+    public function log($message, array $context = [])
     {
         $message = '['.\date('Y-m-d H:i:s').'] '.$message;
         if ($context) {

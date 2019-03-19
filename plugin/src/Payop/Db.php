@@ -26,11 +26,11 @@ class Db
      * @throws \PDOException
      */
     public function __construct(
-        string $host,
-        string $name,
-        string $user,
-        string $password,
-        int $port = 3306,
+        $host,
+        $name,
+        $user,
+        $password,
+        $port = 3306,
         array $options = []
     ) {
         $driverOptions = \array_merge([
@@ -52,7 +52,7 @@ class Db
     /**
      * @return string
      */
-    public function payopPaymentsTableQuery() : string
+    public function payopPaymentsTableQuery()
     {
         return "CREATE TABLE IF NOT EXISTS `payop_payments` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -73,7 +73,7 @@ class Db
      *
      * @throws \PDOException
      */
-    public function createPayopPaymentsTable() : int
+    public function createPayopPaymentsTable()
     {
         return $this->connection->exec($this->payopPaymentsTableQuery());
     }
@@ -85,7 +85,7 @@ class Db
      *
      * @throws \PDOException
      */
-    public function checkItemsTable(string $tableName) : void
+    public function checkItemsTable($tableName)
     {
         $stmt = $this->connection->query("SELECT 1 FROM `{$tableName}`");
         $stmt->execute();
@@ -98,7 +98,7 @@ class Db
      *
      * @throws \PDOException
      */
-    public function checkCharsTable() : void
+    public function checkCharsTable()
     {
         $stmt = $this->connection->query("SELECT 1 FROM `characters`");
         $stmt->execute();
@@ -112,7 +112,7 @@ class Db
      *
      * @throws \PDOException
      */
-    public function getCharacter(string $charName) : array
+    public function getCharacter($charName)
     {
         $stmt = $this->connection->prepare('SELECT * FROM `characters`  WHERE `char_name` = :char_name LIMIT 1');
         $stmt->execute(['char_name' => $charName]);
@@ -132,7 +132,7 @@ class Db
      *
      * @throws \PDOException
      */
-    public function getPayment(int $id) : array
+    public function getPayment($id)
     {
         $stmt = $this->connection->prepare('SELECT * FROM `payop_payments`  WHERE `id` = :id LIMIT 1');
         $stmt->execute(['id' => $id]);
@@ -154,7 +154,7 @@ class Db
      *
      * @throws \PDOException
      */
-    public function createPayment(int $characterId, float $sum, int $itemsCount) : int
+    public function createPayment($characterId, $sum, $itemsCount)
     {
         $query = "INSERT INTO `payop_payments`
                     (`payopId`, `account`, `sum`, `itemsCount`, `dateCreate`, `status`)
@@ -180,7 +180,7 @@ class Db
      * @throws \PDOException
      * @throws \Throwable
      */
-    public function executeSuccessPayment(int $id, int $payopId, string $itemId) : void
+    public function executeSuccessPayment($id, $payopId, $itemId)
     {
         $payment = $this->getPayment($id);
 

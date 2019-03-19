@@ -21,7 +21,7 @@ class PayopClient
      * @throws ResponseException
      * @throws ResponseErrorsException
      */
-    public function createPayment(array $paymentData) : array
+    public function createPayment(array $paymentData)
     {
         $response = \Requests::post("{$this->apiUri}/payments/payment", [], $paymentData);
 
@@ -45,9 +45,9 @@ class PayopClient
      */
     public function generateSignature(
         array $order,
-        string $secretKey,
-        ?string $status = null
-    ) : string {
+        $secretKey,
+        $status = null
+    ) {
         unset($order['items'], $order['description']);
         \ksort($order, SORT_STRING);
         $dataSet = \array_values($order);
@@ -68,7 +68,7 @@ class PayopClient
      *
      * @throws RequestException
      */
-    private function post(string $url, array $params)
+    private function post($url, $params)
     {
         $streamContext = \stream_context_create([
             'http' => [

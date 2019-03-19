@@ -46,7 +46,7 @@ class Handler
      *
      * @return Response
      */
-    public function showForm(Request $request) : Response
+    public function showForm(Request $request)
     {
         $content = $this->view->render('form', [
             'currency'    => $this->config->get('currency'),
@@ -62,7 +62,7 @@ class Handler
      *
      * @return Response
      */
-    public function createPayment(Request $request) : Response
+    public function createPayment(Request $request)
     {
         $response = Response::create();
         $response->headers->set('Content-Type', 'application/json');
@@ -143,7 +143,7 @@ class Handler
             $response->setStatusCode(Response::HTTP_BAD_REQUEST);
             $response->setContent(\json_encode([
                 'data'  => [],
-                'error' => ['message' => $e->getErrors()[0]['message'] ?? $msg],
+                'error' => ['message' => isset($e->getErrors()[0]['message']) ? $e->getErrors()[0]['message'] : $msg],
             ]));
 
             return $response;
@@ -188,7 +188,7 @@ class Handler
      *
      * @return Response
      */
-    public function ipn(Request $request) : Response
+    public function ipn(Request $request)
     {
         $response = Response::create();
         $response->headers->set('Content-Type', 'application/json');
@@ -290,7 +290,7 @@ class Handler
      *
      * @return Response
      */
-    public function successful(Request $request) : Response
+    public function successful(Request $request)
     {
         $content = $this->view->render('successful');
 
@@ -304,7 +304,7 @@ class Handler
      *
      * @return Response
      */
-    public function failed(Request $request) : Response
+    public function failed(Request $request)
     {
         $content = $this->view->render('failed');
 
@@ -318,7 +318,7 @@ class Handler
      *
      * @return Response
      */
-    public function pageNotFound(Request $request) : Response
+    public function pageNotFound(Request $request)
     {
         $content = $this->view->render('404');
 
@@ -329,7 +329,7 @@ class Handler
      * @param string $message
      * @param array $context
      */
-    private function log(string $message, array $context = [])
+    private function log($message, array $context = [])
     {
         if ($this->config->getInt('enableLogs')) {
             $this->logger->log($message, $context);
