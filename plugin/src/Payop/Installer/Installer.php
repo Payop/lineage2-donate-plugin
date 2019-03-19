@@ -81,7 +81,7 @@ class Installer
     {
         $php = [
             'version'    => \substr(PHP_VERSION, 0, 3),
-            'testPassed' => \version_compare(PHP_VERSION, '5.6') !== -1,
+            'testPassed' => \version_compare(PHP_VERSION, '5.4') !== -1,
         ];
         $mysql = [
             'drivers'    => PDO::getAvailableDrivers(),
