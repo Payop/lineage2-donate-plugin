@@ -5,7 +5,7 @@
 
     <div class="offset-1 col-md-11">
         <p class="<?= $php['testPassed'] ? 'text-success' : 'text-error' ?>">
-            <strong>PHP Version:</strong> <?= $php['version'] ?>. Required: 5.6
+            <strong>PHP Version:</strong> <?= $php['version'] ?>. Required: 5.4
         </p>
         <p class="<?= $mysql['testPassed'] ? 'text-success' : 'text-error' ?>">
             <strong>PDO & Mysql:</strong> <?= $mysql['testPassed'] ? 'Драйвер найден'
