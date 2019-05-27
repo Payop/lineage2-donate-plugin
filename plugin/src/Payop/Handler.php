@@ -201,6 +201,7 @@ class Handler
 
         // check order id
         $orderId = $requestBag->getInt('orderId');
+        $paymentStatus = $requestBag->getAlpha('status');
         try {
             $payment = $this->db->getPayment($orderId);
         } catch (\PDOException $e) {
@@ -235,7 +236,7 @@ class Handler
         $signature = (new PayopClient())->generateSignature(
             $order,
             $this->config->get('secretKey'),
-            $requestBag->getAlpha('status')
+            $paymentStatus
         );
         if ($signature !== $requestBag->get('signature')) {
             $this->log('Invalid signature.', [
@@ -250,13 +251,14 @@ class Handler
 
             return $response;
         }
-
         try {
+            if ($paymentStatus == "success") {
             $this->db->executeSuccessPayment(
                 $payment['id'],
                 $requestBag->getInt('PayOpId'),
                 $this->config->get('itemId')
             );
+            }
         } catch (\Throwable $e) {
             $this->log('Error to update payment and add items to character', [
                 'error' => $e->getMessage(),
