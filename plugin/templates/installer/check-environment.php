@@ -19,7 +19,7 @@
 </div>
 <?php if ($php['testPassed'] && $mysql['testPassed'] && $config['testPassed']): ?>
 <div>
-    <a class="btn btn-primary btn-large btn-block" href="/installer.php?step=configuration" title="Продолжить установку">
+    <a class="btn btn-primary btn-large btn-block" href="installer.php?step=configuration" title="Продолжить установку">
         Продолжить установку
     </a>
 </div>
