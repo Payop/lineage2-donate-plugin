@@ -2,10 +2,10 @@ version: '3'
 
 services:
     payop.l2.php:
-        image: nanoninja/php-fpm:7.1
+        image: nanoninja/php-fpm:7.1.14
         command: /bin/bash -c "php -S 0.0.0.0:10001 -t /var/www -e >> /dev/stdout 2>&1"
         volumes:
-            - "./plugin:/var/www"
+            - "./plugin:/var/www/"
         ports:
             - "10001:10001"
         depends_on:

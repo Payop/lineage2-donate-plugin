@@ -144,7 +144,7 @@
                 <input type="submit" class="btn btn-primary btn-large" value="Сохранить конфигурацию">
             </div>
             <div class="offset-2 col-md-5">
-                <a class="btn btn-primary btn-large btn-block" href="/installer.php?step=mysqlConnection" title="Продолжить установку">
+                <a class="btn btn-primary btn-large btn-block" href="installer.php?step=mysqlConnection" title="Продолжить установку">
                     Продолжить установку
                 </a>
             </div>

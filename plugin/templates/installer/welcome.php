@@ -15,7 +15,7 @@
     </div>
 </div>
 <div>
-    <a class="btn btn-primary btn-block" href="/installer.php?step=checkEnvironment" title="Начать установку">
+    <a class="btn btn-primary btn-block" href="installer.php?step=checkEnvironment" title="Начать установку">
         Начать установку
     </a>
 </div>

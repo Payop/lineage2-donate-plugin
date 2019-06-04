@@ -19,7 +19,7 @@
             </div>
             <div class="offset-1 col-md-7">
                 <?php if (!$errors): ?>
-                <a class="btn btn-primary btn-large btn-block" href="/installer.php?step=finish" title="Закончить установку">
+                <a class="btn btn-primary btn-large btn-block" href="installer.php?step=finish" title="Закончить установку">
                     Закончить установку
                 </a>
                 <?php endif; ?>
