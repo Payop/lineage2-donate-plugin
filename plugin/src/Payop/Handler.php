@@ -123,6 +123,11 @@ class Handler
                 'currency'    => $this->config->get('currency'),
                 'description' => "Order #{$orderId}",
             ],
+            'customer'     => [
+                'email' => null,
+                'phone' => null,
+                'name'  => null,
+            ],
             'publicKey' => $this->config->get('publicKey'),
             'resultUrl' => $this->config->get('resultUrl'),
             'failUrl'   => $this->config->get('failUrl'),
