@@ -124,9 +124,9 @@ class Handler
                 'description' => "Order #{$orderId}",
             ],
             'customer'     => [
-                'email' => null,
-                'phone' => null,
-                'name'  => null,
+                'email' => "",
+                'phone' => "",
+                'name'  => "",
             ],
             'publicKey' => $this->config->get('publicKey'),
             'resultUrl' => $this->config->get('resultUrl'),
