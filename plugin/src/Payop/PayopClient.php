@@ -28,13 +28,17 @@ class PayopClient
         $headers = $response->headers;
         $result = \json_decode($response->body, true);
 
-        $result['data']['redirectUrl'] = "https://checkout.payop.com/en/payment/invoice-preprocessing/{$headers['identifier']}";
         if (!$result) {
             throw new ResponseException("Invalid response from Payop: {$response->body}");
+        }
+        if (!$headers['identifier']) {
+            throw new ResponseException("Identifier header is empty: {$response->headers}");
         }
         if ($response->status_code >= 400) {
             throw new ResponseErrorsException($result['errors']);
         }
+
+        $result['data']['redirectUrl'] = "https://checkout.payop.com/en/payment/invoice-preprocessing/{$headers['identifier']}";
 
         return $result;
     }
