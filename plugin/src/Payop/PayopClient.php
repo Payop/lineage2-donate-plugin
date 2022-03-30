@@ -11,7 +11,7 @@ class PayopClient
     /**
      * @var string
      */
-    private $apiUri = 'https://payop.com/api/v1.1';
+    private $apiUri = 'https://payop.com/v1';
 
     /**
      * @param array $paymentData
@@ -23,15 +23,22 @@ class PayopClient
      */
     public function createPayment(array $paymentData)
     {
-        $response = \Requests::post("{$this->apiUri}/payments/payment", [], $paymentData);
+        $response = \Requests::post("{$this->apiUri}/invoices/create", [], $paymentData);
 
+        $headers = $response->headers;
         $result = \json_decode($response->body, true);
+
         if (!$result) {
             throw new ResponseException("Invalid response from Payop: {$response->body}");
+        }
+        if (!$headers['identifier']) {
+            throw new ResponseException("Identifier header is empty: {$response->headers}");
         }
         if ($response->status_code >= 400) {
             throw new ResponseErrorsException($result['errors']);
         }
+
+        $result['data']['redirectUrl'] = "https://checkout.payop.com/en/payment/invoice-preprocessing/{$headers['identifier']}";
 
         return $result;
     }
