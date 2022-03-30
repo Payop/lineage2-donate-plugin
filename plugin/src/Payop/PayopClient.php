@@ -23,10 +23,12 @@ class PayopClient
      */
     public function createPayment(array $paymentData)
     {
-        $response = \Requests::post("{$this->apiUri}/checkout/create", [], $paymentData);
+        $response = \Requests::post("{$this->apiUri}/invoices/create", [], $paymentData);
 
+        $headers = $response->headers;
         $result = \json_decode($response->body, true);
-        $result['redirectUrl'] = "https://checkout.payop.com/en/payment/invoice-preprocessing/{$result['txid']}";
+
+        $result['data']['redirectUrl'] = "https://checkout.payop.com/en/payment/invoice-preprocessing/{$headers['identifier']}";
         if (!$result) {
             throw new ResponseException("Invalid response from Payop: {$response->body}");
         }
